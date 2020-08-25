@@ -1,3 +1,5 @@
+"Add these lines to your .vimrc file, or just source this file from there.
+
 "given a pattern, returns the list of possible complete options
 "you have to define the global variable 'g:complete_dict' (a dictionary)
 "it would be a good idea to define this variable for each different filetype
