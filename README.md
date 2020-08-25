@@ -19,6 +19,8 @@ a list of words (these words are actually used to provide suggestions to the use
 is equal to 1, and `base` could be ignored. The second time, `findstart` is equal to 0
 and `base` is equal to the word which should be completed.
 
+![example](img/example.gif)
+
 ## The dictionary
 
 In this script, the complete function starts the completion
@@ -45,3 +47,4 @@ to other IDEs:
   "this goes inside you .vimrc file
   ino <C-@> <C-x><C-u>
   ```
+
