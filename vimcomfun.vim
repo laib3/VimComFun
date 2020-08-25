@@ -20,8 +20,8 @@ function! GetCompleteOptions(pattern)
   return []
 endfunction
 
-
-"invoked by
+"invoked by the combination <C-x><C-u>. You can remap this combination
+"to <C-@> (i.e. CTRL+Space) to have something similar to other IDEs.
 function! CompleteFunc(findstart, base)
   if(a:findstart == 1)
 	normal b
