@@ -29,7 +29,7 @@ You have to define this dictionary as a global variable named `g:complete_dict` 
 somewhere else, otherwise you will get an error message.
 It would be a good idea to have separate dictionaries for different languages.
 Notice that by default this function won't provide any suggestion, you have to create your own dictionaries! 
-(but I made an example of how to make one).
+(but I made [an example](c_example.vim) of how to make one).
 
 Personally I really like this approach, though there's maybe a better way to do
 it.
