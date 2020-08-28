@@ -22,21 +22,25 @@ function! GetCompleteOptions(pattern)
   return []
 endfunction
 
+function! GetCompStart()
+  normal b
+  return col('.')-1
+endfunction
+
 "invoked by the combination <C-x><C-u>. You can remap this combination
 "to <C-@> (i.e. CTRL+Space) to have something similar to other IDEs.
 function! CompleteFunc(findstart, base)
   if(a:findstart == 1)
-	normal b
-	return col('.')-1
+	return GetCompStart()
   endif
   if(a:findstart == 0)
 	let completeoptions = GetCompleteOptions(a:base)
-	if(completeoptions != [])
-	  let retval = #{words: completeoptions, refresh: "always"}
-	  return retval
+	if(completeoptions == [])
+	  echo "nothing found"
 	endif
+	let retval = #{words: completeoptions, refresh: "always"}
+	return retval
   endif
 endfunction
-
 
 set completefunc=CompleteFunc
