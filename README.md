@@ -29,7 +29,7 @@ You have to define this dictionary as a global variable named `g:complete_dict` 
 somewhere else, otherwise you will get an error message.
 It would be a good idea to have separate dictionaries for different languages.
 Notice that by default this function won't provide any suggestion, you have to create your own dictionaries! 
-(but I made [an example](c_example.vim) of how to make one).
+(I made [an example](c_example.vim) of how to create one).
 
 Personally I really like this approach, though there's maybe a better way to do
 it.
@@ -50,3 +50,14 @@ to other IDEs:
   ino <C-@> <C-x><C-u>
   ```
 
+### The 'dot' key
+
+You can define a special value inside the dictionary which is associated to a key
+named “dot”. When you type the dot character (.) and you invoke the complete function, 
+you get suggestions from this value. You could use this to provide methods 
+suggestions.
+
+For example, let's say you just typed “something.” and you call the complete function.
+Then you get all the suggestions which start with a dot: “something.toString()”, “something.value”, 
+etc...
+(remember that you have to put this suggestions inside your dictionary).
