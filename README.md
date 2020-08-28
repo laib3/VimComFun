@@ -29,7 +29,7 @@ You have to define this dictionary as a global variable named `g:complete_dict` 
 somewhere else, otherwise you will get an error message.
 It would be a good idea to have separate dictionaries for different languages.
 Notice that by default this function won't provide any suggestion, you have to create your own dictionaries! 
-([This is an example](c_example.vim) of how to create one).
+([This](c_example.vim) in an example of how to create one).
 
 Personally I really like this approach, though there's maybe a better way to do
 it.
@@ -55,6 +55,7 @@ The `ReadDict()` function creates a dictionary from a text file, given its path.
 The text file should have the following format:
 + Each key must have a hash character (#) before it 
 + Each key must be followed by a list of suggestions, one by line.
+
 [This](javascript_dict.txt) is an example of valid dictionary file for javascript.
 
 Now you no longer have to define a dictionary, you can just call the `ReadDict` function
@@ -74,7 +75,7 @@ named “dot”. When you type the dot character (.) and you invoke the complete
 you get suggestions from this value. You could use this to provide methods 
 suggestions.
 
-For example, let's say you just typed “something.” and you call the complete function.
-Then you get all the suggestions which start with a dot: “something.toString()”, “something.value”, 
+For example, let's say you just typed `something.` and you call the complete function.
+Then you get all the suggestions which start with a dot: `something.toString()`, `something.valueOf()`, 
 etc...
 (remember that you have to put this suggestions inside your dictionary).
