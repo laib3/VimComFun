@@ -1,5 +1,23 @@
 "Add these lines to your .vimrc file, or just source this file from there.
 
+"given a path, return a dictionary; the file which contains the dictionary
+"should have the following format: 
+" - each key of the dictionary has a hash character (#) before 
+" - each key is followed by the values (suggestions) one by line
+function ReadDict(path)
+  let dictionary = #{}
+  let file = readfile(a:path)
+  for line in file 
+	if(line[0] == "#")
+	  let key = line[1:]
+	  let dictionary[key] = []
+	else
+	  call add(dictionary[key], line)
+	endif
+  endfor
+  return dictionary
+endfunction
+
 "given a pattern, returns the list of possible complete options
 "you have to define the global variable 'g:complete_dict' (a dictionary)
 "it would be a good idea to define this variable for each different filetype
