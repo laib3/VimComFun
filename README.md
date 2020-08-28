@@ -29,7 +29,7 @@ You have to define this dictionary as a global variable named `g:complete_dict` 
 somewhere else, otherwise you will get an error message.
 It would be a good idea to have separate dictionaries for different languages.
 Notice that by default this function won't provide any suggestion, you have to create your own dictionaries! 
-(I made [an example](c_example.vim) of how to create one).
+([This is an example](c_example.vim) of how to create one).
 
 Personally I really like this approach, though there's maybe a better way to do
 it.
@@ -42,13 +42,30 @@ _“document”_ inside of it, you will get all the suggestions which are associ
 with the _“document”_ keyword.
 
 You can remap the combination `<C-x><C-u>` (which is associated with the complete
-function) to the combination `<C-@>` (i.e. CTRL+Space) to get something similar
-to other IDEs:
+function) to the combination `<C-@>` (i.e. CTRL+Space) inside your `vimrc` file 
+to get something similar to other IDEs:
   
-  ``` 
-  "this goes inside you .vimrc file
-  ino <C-@> <C-x><C-u>
-  ```
+``` 
+ino <C-@> <C-x><C-u>
+```
+
+### The dictionary file
+
+The `ReadDict()` function creates a dictionary from a text file, given its path.
+The text file should have the following format:
++ Each key must have a hash character (#) before it 
++ Each key must be followed by a list of suggestions, one by line.
+[This](javascript_dict.txt) is an example of valid dictionary file for javascript.
+
+Now you no longer have to define a dictionary, you can just call the `ReadDict` function
+for each filetype. For example, inside your `vimrc` file:
+
+```
+autocmd FileType javascript let g:complete_dict = ReadFile("/path/to/javascript/dictionary.txt")
+autocmd FileType c let g:complete_dict = ReadFile("/path/to/c/dictionary.txt")
+...
+```
+
 
 ### The 'dot' key
 
