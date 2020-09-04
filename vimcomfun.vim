@@ -46,7 +46,8 @@ function! GetCompleteOptions(pattern)
 endfunction
 
 function! GetCompStart()
-  normal b
+  " move to the previous WORD
+  normal B
   return col('.')-1
 endfunction
 
