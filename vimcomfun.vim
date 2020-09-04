@@ -18,6 +18,22 @@ function ReadDict(path)
   return dictionary
 endfunction
 
+"if the pattern contains a key from the dictionary or a key 
+"contains the pattern, return the key
+"else return an empty string
+function! KeywordFrom(pattern)
+  let idx = -1
+  let keywords = keys(g:complete_dict)
+  for word in keywords
+	let match = max([stridx(a:pattern, word), stridx(word, a:pattern)])
+	let idx+=1
+	if(match != -1)
+	  return keywords[idx]
+	endif
+  endfor  
+  return ""
+endfunction
+
 "given a pattern, returns the list of possible complete options
 "you have to define the global variable 'g:complete_dict' (a dictionary)
 "it would be a good idea to define this variable for each different filetype
@@ -26,28 +42,18 @@ function! GetCompleteOptions(pattern)
 	echoerr "g:complete_dict not set!" 
 	return []
   endif
-  let idx = -1
-  let keywords = keys(g:complete_dict)
-  for word in keywords
-	let match = max([stridx(a:pattern, word), stridx(word, a:pattern)])
-	let idx+=1
-	"if the pattern is in keywords then get the list of possible completions
-	if (match != -1) 
-	  let keyword = keywords[idx]
-	  return g:complete_dict[keyword]
-	endif	  
-  endfor
-  if(stridx(a:pattern, '.') != -1)
-	if exists("g:complete_dict['dot']")
+  let key = KeywordFrom(a:pattern)
+  if(key!="")
+	return g:complete_dict[key]
+  endif
+  if(stridx(a:pattern, '.') != -1 && exists("g:complete_dict['dot']"))
 	  return g:complete_dict["dot"]
-	endif
   endif
   return []
 endfunction
 
 function! GetCompStart()
-  " move to the previous WORD
-  normal B
+  normal b
   return col('.')-1
 endfunction
 
