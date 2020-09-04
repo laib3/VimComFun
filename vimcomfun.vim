@@ -26,11 +26,6 @@ function! GetCompleteOptions(pattern)
 	echoerr "g:complete_dict not set!" 
 	return []
   endif
-  if(stridx(a:pattern, '.') != -1)
-	if exists("g:complete_dict['dot']")
-	  return g:complete_dict["dot"]
-	endif
-  endif
   let idx = -1
   let keywords = keys(g:complete_dict)
   for word in keywords
@@ -42,6 +37,11 @@ function! GetCompleteOptions(pattern)
 	  return g:complete_dict[keyword]
 	endif	  
   endfor
+  if(stridx(a:pattern, '.') != -1)
+	if exists("g:complete_dict['dot']")
+	  return g:complete_dict["dot"]
+	endif
+  endif
   return []
 endfunction
 
